@@ -2,11 +2,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class AIML {
 	public static void main(String[]args) throws Exception {
 		BufferedReader br = new BufferedReader(new FileReader(new File("pubmed200Abstract.txt")));
 		ArrayList<Integer> lineNumbers = new ArrayList<Integer>();
+		ArrayList<String> entries = new ArrayList<String>();
 		int startNum = 2;
 		
 		int count = startNum;
@@ -34,7 +36,13 @@ public class AIML {
 			else {
 				if(!total.equals("")) {
 					System.out.println(total);
-					Thread.sleep(10000);
+					entries.add(total);
+					ArrayList<String> test = (splitEntry(total));
+					for(int i = 0; i < test.size(); i++) {
+						//System.out.println(test.get(i));
+						//Thread.sleep(10);
+					}
+					Thread.sleep(2000);
 					total = line;
 				}
 				check = true;
@@ -46,5 +54,9 @@ public class AIML {
 		
 		
 		br.close();
+	}
+	
+	public static ArrayList<String> splitEntry(String entry){
+		return new ArrayList<String>(Arrays.asList(entry.split(", ")));
 	}
 }
